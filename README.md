@@ -5,19 +5,17 @@ This project implements a Text-to-Image Synthesis model using Generative Adversa
 The system learns the relationship between descriptive language and visual features using the Oxford 102 Flowers Dataset, producing images that match input text descriptions.
 
 ⚙️ Installation and Setup Instructions
-1️⃣ Clone the Repository
-git clone https://github.com/paarthneekhara/text-to-image.git
-cd text-to-image
 
-2️⃣ Create a Virtual Environment (Optional but Recommended)
+
+Create a Virtual Environment (Optional but Recommended)
 python -m venv venv
 source venv/bin/activate   # macOS/Linux
 venv\Scripts\activate      # Windows
 
-3️⃣ Install Dependencies
+Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Verify Setup
+Verify Setup
 
 Run the setup notebook to confirm environment and data access:
 
@@ -32,7 +30,7 @@ Sample flower image displayed
 
 Caption examples and summary plots
 
-📊 Dataset Information
+Dataset Information
 
 Dataset: Oxford 102 Flowers Dataset
 
@@ -68,8 +66,8 @@ Caption embedding via Skip Thought Vectors
 
 Alignment between text and corresponding image
 
-🚀 How to Run the Project
-1️⃣ Train the Model
+How to Run the Project
+1️.Train the Model
 python train.py --data_set="flowers"
 
 
@@ -83,7 +81,7 @@ Options:
 
 --epochs: Total epochs (default: 600)
 
-2️⃣ Generate Images from Captions
+2. Generate Images from Captions
 
 Write sample captions in Data/sample_captions.txt, then run:
 
@@ -107,8 +105,8 @@ Save or download generated results
 
 👨‍💻 Author Information
 
-Author: Venkata Krishna Raj Abhishek Gade
-Institution: Northeastern University, Boston
-Email: gade.v@northeastern.edu
+Author: Sai Nilasha Varma Indukuri
+Institution: University of Flroida, Gainesville
+Email: s.indukuri@ufl.edu
 
-GitHub: https://github.com/paarthneekhara/text-to-image
+
