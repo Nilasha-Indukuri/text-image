@@ -10,7 +10,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 gen1 = GeneratorStage1().to(device)
 gen2 = GeneratorStage2().to(device)
 
-gen1.load_state_dict(torch.load('generator_stage1_epoch_10.pth', map_location=device))  # Adjust path if needed
+gen1.load_state_dict(torch.load('generator_stage1_epoch_10.pth', map_location=device))
 gen2.load_state_dict(torch.load('generator_stage2_epoch_10.pth', map_location=device))
 
 gen1.eval()
@@ -29,9 +29,9 @@ def generate_image_from_text(text, noise_dim=100):
         fake_img128 = gen2(fake_img64, text_emb)
 
     img = fake_img128.squeeze().cpu().numpy()
-    img = (img + 1.0) / 2.0  # Normalize to [0,1]
+    img = (img + 1.0) / 2.0 
     img = np.clip(img, 0, 1)
-    img = np.transpose(img, (1, 2, 0))  # CHW to HWC
+    img = np.transpose(img, (1, 2, 0))
     img = (img * 255).astype(np.uint8)
     return Image.fromarray(img)
 
