@@ -1,112 +1,46 @@
-Text-to-Image Synthesis using GANs and Skip Thought Vectors
-Project Overview
+# Text-to-Image GAN Generator (MS-COCO with StackGAN)
 
-This project implements a Text-to-Image Synthesis model using Generative Adversarial Networks (GAN-CLS) and Skip Thought Vectors to generate realistic images directly from text captions.
-The system learns the relationship between descriptive language and visual features using the Oxford 102 Flowers Dataset, producing images that match input text descriptions.
+This project implements a text-to-image generator trained on the MS-COCO dataset using a two-stage StackGAN architecture, designed to generate high-quality 128x128 images conditioned on textual captions.
 
-⚙️ Installation and Setup Instructions
+---
 
+## Features
 
-Create a Virtual Environment (Optional but Recommended)
-python -m venv venv
-source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate      # Windows
+- Generate realistic 128x128 images from natural language text.
+- Two-stage GAN architecture refines images progressively for better details.
+- Uses CLIP embeddings for rich semantic text representation.
+- Interactive Gradio interface for easy text input and multimodal image generation.
+- Regenerate images multiple times per caption for diverse outputs.
+- Adjustable creativity slider affecting noise level and variation.
 
-Install Dependencies
-pip install -r requirements.txt
+---
 
-Verify Setup
+## Demo Interface Overview
 
-Run the setup notebook to confirm environment and data access:
+- **Caption input**: Enter a detailed text description (e.g., "a red sports car speeding on a highway at sunset").
+- **Number of Images to Generate**: Choose how many images to generate simultaneously (1 to 5).
+- **Creativity (Noise Level)**: Higher noise values produce more varied and creative outputs.
+- **Generate Images** button: Triggers image generation from caption with specified parameters.
+- **Refine (Regenerate)** button: Repeats generation with the same input to explore variations.
+- **Output Gallery**: Displays generated images with respective match scores (note: in your current setup, errors indicate model or loading issues; ensure your weights and environment are correctly set up).
 
-jupyter notebook notebooks/setup.ipynb
+---
 
+## Typical Errors and Solutions
 
-You should see:
+If you see `Error` placeholders instead of images:
 
-Python and TensorFlow versions printed
+- Verify that your generator weights file (`generator_final.pth` or equivalent) exists, is correctly located, and compatible with the code.
+- Ensure that all required dependencies are installed correctly and that your Python environment matches the project requirements.
+- Check for GPU availability or adjust batch sizes and epochs if running on CPU to avoid timeout or memory issues.
+- Restart the Gradio app after fixing the above and retry.
 
-Sample flower image displayed
+---
 
-Caption examples and summary plots
+## Installation
 
-Dataset Information
+1. Clone the repository or copy the source files.
+2. Install dependencies:
 
-Dataset: Oxford 102 Flowers Dataset
-
-Type: Image + text (captions)
-Structure:
-
-data/
- ├── flowers/
- │   ├── jpg/                # flower images
- │   └── text_c10/           # captions per image
- └── skipthoughts/           # pretrained Skip Thought model files
-
-
-How to Obtain Data:
-Run the provided dataset download script:
-
-python download_datasets.py
-
-
-Alternatively, manually download:
-
-Images: from Oxford Flowers dataset site
-
-Captions: from the provided Google Drive link
-
-Skip Thought Models: from Skip-Thoughts repository
-
-Preprocessing Includes:
-
-Image resizing to 64×64 pixels
-
-Caption embedding via Skip Thought Vectors
-
-Alignment between text and corresponding image
-
-How to Run the Project
-1️.Train the Model
-python train.py --data_set="flowers"
-
-
-Options:
-
---z_dim: Noise dimension (default: 100)
-
---t_dim: Text feature dimension (default: 256)
-
---batch_size: Training batch size (default: 64)
-
---epochs: Total epochs (default: 600)
-
-2. Generate Images from Captions
-
-Write sample captions in Data/sample_captions.txt, then run:
-
-python generate_thought_vectors.py --caption_file="Data/sample_captions.txt"
-python generate_images.py --model_path="Data/Models/latest_model_flowers_temp.ckpt" --n_images=5
-
-
-Generated outputs will be saved under:
-
-data/val_samples/
-
-🖥️ User Interface (Coming Soon)
-
-A Streamlit-based interface will allow users to:
-
-Input text captions
-
-Generate and visualize corresponding images
-
-Save or download generated results
-
-👨‍💻 Author Information
-
-Author: Sai Nilasha Varma Indukuri
-Institution: University of Flroida, Gainesville
-Email: s.indukuri@ufl.edu
-
-
+```bash
+pip install torch torchvision clip-by-openai gradio pillow numpy
